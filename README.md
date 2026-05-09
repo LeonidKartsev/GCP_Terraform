@@ -1,51 +1,44 @@
-# **Terraform**
+# Terraform — GCP infrastructure
+
 <div align="center">
-  <img src="https://se.ewi.tudelft.nl/desosa2019/chapters/terraform/images/617845e3592d99b71c40470d33c1785090cc4afa.png" alt="Terraform Logo" width="500">
+  <img src="https://se.ewi.tudelft.nl/desosa2019/chapters/terraform/images/617845e3592d99b71c40470d33c1785090cc4afa.png" alt="Terraform logo" width="500">
 </div>
 
-## Purpose
+## Overview
 
-The purpose of this repository is to manage Google Cloud Platform (GCP) resources for "devops-workshop-2023" project.
-Repository functionality provides the gitops approach for managing GCP resources:
+This repository manages Google Cloud Platform (GCP) resources for the **devops-workshop-2023** project. It follows a GitOps-style workflow for provisioning and updating:
 
-- Google Cloud Storage (GCS),
-- Google Kubernetes Engine (GKE),
-- Identity and Access Management (IAM),
-- Load Balancer,
+- Google Cloud Storage (GCS)
+- Google Kubernetes Engine (GKE)
+- Identity and Access Management (IAM)
+- Load balancing
 - Virtual Private Cloud (VPC)
-
-
 
 ## Features
 
-###### Infrastructure as Code:
+### Infrastructure as code
 
-GCP resources defined with Terraform configuration files.
+GCP resources are declared in Terraform configuration files.
 
-###### Modifiable Terraform Versions
+### Per-directory Terraform versions
 
-Terraform-runner based on tfswitch tool. 
+The Terraform runner uses [tfswitch](https://github.com/warrensbox/terraform-switcher). You can pin a Terraform version per directory via `tfswitch.toml`.
 
-You can specify terraform version separately for each directory in tfswitch.toml file.
+### GitLab CI/CD
 
-###### GitLab CI/CD Integration:
+`.gitlab-ci.yml` defines pipelines for each infrastructure area under the DevOps Workshop 2023 project.
 
-.gitlab-ci.yml files create GitLab CI/CD pipelines for separate infrastructures under the "DevOps Workshop 2023" project.
+## Contributing to GCP infrastructure
 
+### 1. Open a merge request
 
-## How to contribute to GCP infrastructure
+1. Create a branch from `master`.
+2. Apply your infrastructure changes.
+3. Push the branch and open a merge request.
+4. Wait for the pipeline **plan** stage to finish successfully and confirm the plan is valid.
 
-To use this Terraform repository and create infrastructure on GCP, follow these steps:
+### 2. Merge to `master`
 
-###### Step 1: Create merge request 
-- Cut your own branch from master
-- Add your changes to infrastructure
-- Push changes your changes and create merge request 
-- Merge request CI/CD pipeline will run the plan stage
-- Ensure that plan is valid
-
-###### Step 2 : Merge into master
-- Merge your MR to master branch
-- The CI/CD pipeline will run the plan stage
-- Ensure that terraform plan still valid 
-- Trigger `apply job` manually
+1. Merge the MR into `master`.
+2. Confirm the post-merge pipeline **plan** stage still succeeds.
+3. Manually trigger the **apply** job when you are ready to deploy.
